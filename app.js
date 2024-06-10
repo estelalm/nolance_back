@@ -302,6 +302,15 @@ app.get('/v1/nolance/users', cors(), async (request, response) => {
     response.json(usersData)
 })
 
+app.get('/v1/nolance/user/:id', cors(), async (request, response) => {
+
+    let id = request.params.id
+    let usersData = await controllerUsuarios.listUserById(id)
+
+    response.status(usersData.status_code)
+    response.json(usersData)
+})
+
 app.get('/v1/nolance/user', cors(), async (request, response) => {
 
     let email = request.query.email

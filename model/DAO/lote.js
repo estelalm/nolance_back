@@ -130,12 +130,13 @@ const insertCategoriaLote = async function(subcategoriaId, loteId) {
 }
 
 
-const insertImageLote = async function(idLote, url){
+const insertImageLote = async function(url, idLote){
     let id = idLote
 
     try{
         let sql = `insert into tbl_imagens_lote (url, lote_id) values
-        (${url},${id})`
+        ("${url}",${id})`
+        console.log(sql)
         
         let rsLote = await prisma.$executeRawUnsafe(sql)
 

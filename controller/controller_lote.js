@@ -75,6 +75,11 @@ const getBuscarLote = async function (id) {
                 let subcategoriaLote = await controllerSubcategorias.getBuscarSubcategoriasByLote(lote.id)
                 lote.subcategoria = subcategoriaLote.subcategorias
             }))
+            await Promise.all(dadosLote.map(async lote =>{
+                let imagensLote = await lotesDAO.selectImagemLote(lote.id)
+                lote.imagens = imagensLote
+            }))
+
 
             if (dadosLote) {
                 if (dadosLote.length > 0) {
@@ -126,6 +131,7 @@ const setInserirLote = async function (dadosBody, contentType) {
                 let novaImagemLote
                 dadosLote.imagens.forEach(async url =>{
                     novaImagemLote = await lotesDAO.insertImageLote(url, novoLoteId)
+                    console.log(novaImagemLote)
                 })
                 let dadosNovoLote = await getBuscarLote(novoLoteId)
 
